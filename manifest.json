@@ -1,7 +1,7 @@
 {
 	"id": "wikipedia-search",
 	"name": "Wikipedia Search",
-	"version": "1.8.0",
+	"version": "2.0.0",
 	"minAppVersion": "0.15.0",
 	"description": "Search, link and open Wikipedia articles all from within the app!",
 	"author": "StrangeGirlMurph",
