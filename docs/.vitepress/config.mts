@@ -2,10 +2,10 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-	title: "Obsidian Wikipedia Search",
-	description: "An Obsidian plugin to search, link and open Wikipedia articles directly from the app.",
+	title: "Obsidian Wikipedia Helper",
+	description: "A better Wikipedia plugin: Search, link, insert and open Wikipedia/Wikimedia articles.",
 	lang: "en-US",
-	base: "/obsidian-wikipedia-search/",
+	base: "/obsidian-wikipedia-helper/",
 
 	themeConfig: {
 		search: {
@@ -34,10 +34,10 @@ export default defineConfig({
 			},
 		],
 
-		socialLinks: [{ icon: "github", link: "https://github.com/StrangeGirlMurph/obsidian-wikipedia-search" }],
+		socialLinks: [{ icon: "github", link: "https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper" }],
 
 		editLink: {
-			pattern: "https://github.com/StrangeGirlMurph/obsidian-wikipedia-search/edit/master/docs/:path",
+			pattern: "https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/edit/master/docs/:path",
 		},
 	},
 });

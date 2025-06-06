@@ -3,8 +3,8 @@ import { LinkArticleModal } from "./commands/linkArticles";
 import {
 	DEFAULT_SETTINGS,
 	DEFAULT_TEMPLATE,
-	WikipediaSearchSettings,
-	WikipediaSearchSettingTab,
+	WikipediaHelperSettings,
+	WikipediaHelperSettingTab,
 } from "./settings";
 import { OpenArticleModal } from "./commands/openArticles";
 import { wikipediaIcon } from "./utils/wikipediaIcon";
@@ -32,11 +32,11 @@ export const wikilist: Wiki[] = [
 	"Wikinews",
 ];
 
-export default class WikipediaSearchPlugin extends Plugin {
-	settings: WikipediaSearchSettings;
+export default class WikipediaHelperPlugin extends Plugin {
+	settings: WikipediaHelperSettings;
 
 	async onload() {
-		console.log("loading wikipedia-search plugin");
+		console.log("Loading Wikipedia Helper plugin");
 
 		await this.loadSettings();
 
@@ -85,7 +85,7 @@ export default class WikipediaSearchPlugin extends Plugin {
 			});
 		}
 
-		this.addSettingTab(new WikipediaSearchSettingTab(this.app, this));
+		this.addSettingTab(new WikipediaHelperSettingTab(this.app, this));
 	}
 
 	onunload() {}

@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "Wikipedia Search"
+  name: "Wikipedia Helper"
   text: "Documentation"
-  tagline: An Obsidian plugin to search, link and open Wikipedia/Wiki articles directly from the app.
+  tagline: "A better Wikipedia plugin: Search, link, insert and open Wikipedia/Wikimedia articles."
   actions:
     - theme: brand
       text: Getting Started

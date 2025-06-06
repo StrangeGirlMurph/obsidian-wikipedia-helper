@@ -10,7 +10,7 @@ A list of all the available settings including detailed explanations for each on
 
 ### Language
 
-Select the default Wiki language to search. See [languages.ts](https://github.com/StrangeGirlMurph/obsidian-wikipedia-search/blob/master/src/utils/languages.ts) for a list of all available languages.
+Select the default Wiki language to search. See [languages.ts](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/blob/master/src/utils/languages.ts) for a list of all available languages.
 Note: Some features might not work with all languages. (Some APIs might not have all the necessary functionality.)
 
 Default: `en - English`

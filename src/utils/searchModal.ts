@@ -1,7 +1,7 @@
 import { App, Editor, Notice, SuggestModal } from "obsidian";
 import { languages } from "../utils/languages";
 import { getWikipediaArticleDescriptions, getWikipediaArticles } from "../API/wikipedia";
-import { WikipediaSearchSettings } from "../settings";
+import { WikipediaHelperSettings } from "../settings";
 import { getWikiArticles } from "../API/mediawiki";
 import { Wiki } from "src/main";
 
@@ -16,11 +16,11 @@ export interface ArticleWithDescription extends Article {
 }
 
 export abstract class SearchModal extends SuggestModal<Article> {
-	settings: WikipediaSearchSettings;
+	settings: WikipediaHelperSettings;
 	editor: Editor | undefined;
 	wiki: Wiki;
 
-	constructor(app: App, settings: WikipediaSearchSettings, wiki: Wiki, editor?: Editor) {
+	constructor(app: App, settings: WikipediaHelperSettings, wiki: Wiki, editor?: Editor) {
 		super(app);
 		this.settings = settings;
 		this.wiki = wiki;

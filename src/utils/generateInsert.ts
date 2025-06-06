@@ -1,5 +1,5 @@
 import { Notice } from "obsidian";
-import { WikipediaSearchSettings } from "src/settings";
+import { WikipediaHelperSettings } from "src/settings";
 import { languages } from "./languages";
 import { Article } from "./searchModal";
 import {
@@ -10,7 +10,7 @@ import {
 import { Wiki } from "src/main";
 
 export async function generateInsert(
-	settings: WikipediaSearchSettings,
+	settings: WikipediaHelperSettings,
 	article: Article,
 	wiki: Wiki,
 	content: string,

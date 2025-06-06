@@ -1,5 +1,5 @@
 import { App, Editor, Notice, TFile } from "obsidian";
-import { Template, WikipediaSearchSettings } from "../settings";
+import { Template, WikipediaHelperSettings } from "../settings";
 import { Article } from "src/utils/searchModal";
 import { SearchModal } from "src/utils/searchModal";
 import { TemplateModal } from "src/utils/templateModal";
@@ -26,7 +26,7 @@ class LinkArticleTemplateModal extends TemplateModal {
 async function linkArticle(
 	app: App,
 	editor: Editor,
-	settings: WikipediaSearchSettings,
+	settings: WikipediaHelperSettings,
 	article: Article,
 	wiki: Wiki,
 	template: Template

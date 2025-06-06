@@ -1,9 +1,9 @@
 {
 	"id": "wikipedia-search",
-	"name": "Wikipedia Search",
+	"name": "Wikipedia Helper",
 	"version": "2.6.1",
 	"minAppVersion": "1.8.0",
-	"description": "Search, link and open Wikipedia/Wiki articles, all within the app!",
+	"description": "A better Wikipedia plugin: Search, link, insert and open Wikipedia/Wikimedia articles.",
 	"author": "StrangeGirlMurph",
 	"authorUrl": "https://github.com/StrangeGirlMurph/",
 	"fundingUrl": {

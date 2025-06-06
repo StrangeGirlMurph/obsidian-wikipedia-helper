@@ -1,5 +1,5 @@
 import { App, Editor, Notice, TFile } from "obsidian";
-import { Template, WikipediaSearchSettings } from "../settings";
+import { Template, WikipediaHelperSettings } from "../settings";
 import { Article } from "src/utils/searchModal";
 import { SearchModal } from "src/utils/searchModal";
 import { TemplateModal } from "src/utils/templateModal";
@@ -28,7 +28,7 @@ export class CreateArticleNoteModal extends SearchModal {
 class CreateArticleNoteTemplateModal extends TemplateModal {
 	constructor(
 		app: App,
-		settings: WikipediaSearchSettings,
+		settings: WikipediaHelperSettings,
 		editor: Editor,
 		article: Article,
 		wiki: Wiki,
@@ -44,7 +44,7 @@ class CreateArticleNoteTemplateModal extends TemplateModal {
 
 async function createArticleNote(
 	app: App,
-	settings: WikipediaSearchSettings,
+	settings: WikipediaHelperSettings,
 	article: Article,
 	wiki: Wiki,
 	template: Template

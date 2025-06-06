@@ -1,10 +1,10 @@
 import { SuggestModal, Editor, App, TFile } from "obsidian";
-import { Template, WikipediaSearchSettings } from "src/settings";
+import { Template, WikipediaHelperSettings } from "src/settings";
 import { Article } from "./searchModal";
 import { Wiki } from "src/main";
 
 export abstract class TemplateModal extends SuggestModal<Template> {
-	settings: WikipediaSearchSettings;
+	settings: WikipediaHelperSettings;
 	editor: Editor;
 	article: Article;
 	wiki: Wiki;
@@ -12,7 +12,7 @@ export abstract class TemplateModal extends SuggestModal<Template> {
 
 	constructor(
 		app: App,
-		settings: WikipediaSearchSettings,
+		settings: WikipediaHelperSettings,
 		editor: Editor,
 		article: Article,
 		wiki: Wiki,

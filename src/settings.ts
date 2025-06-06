@@ -1,6 +1,6 @@
 import { App, Notice, PluginSettingTab, SearchComponent, Setting } from "obsidian";
 import { languages } from "./utils/languages";
-import WikipediaSearchPlugin from "./main";
+import WikipediaHelperPlugin from "./main";
 import { FolderSuggest } from "./utils/suggesters/folderSuggest";
 import { FileSuggest } from "./utils/suggesters/fileSuggest";
 
@@ -25,7 +25,7 @@ export const DEFAULT_TEMPLATE: Template = {
 	templateFilePath: "",
 };
 
-export interface WikipediaSearchSettings {
+export interface WikipediaHelperSettings {
 	language: string;
 	searchLimit: number;
 	thumbnailWidth: number;
@@ -41,7 +41,7 @@ export interface WikipediaSearchSettings {
 	showedWebviewerMessage: boolean;
 }
 
-export const DEFAULT_SETTINGS: WikipediaSearchSettings = {
+export const DEFAULT_SETTINGS: WikipediaHelperSettings = {
 	language: "en",
 	searchLimit: 10,
 	thumbnailWidth: NaN,
@@ -57,11 +57,11 @@ export const DEFAULT_SETTINGS: WikipediaSearchSettings = {
 	showedWebviewerMessage: false,
 };
 
-export class WikipediaSearchSettingTab extends PluginSettingTab {
-	plugin: WikipediaSearchPlugin;
-	settings: WikipediaSearchSettings;
+export class WikipediaHelperSettingTab extends PluginSettingTab {
+	plugin: WikipediaHelperPlugin;
+	settings: WikipediaHelperSettings;
 
-	constructor(app: App, plugin: WikipediaSearchPlugin) {
+	constructor(app: App, plugin: WikipediaHelperPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 		this.settings = plugin.settings;
@@ -74,7 +74,7 @@ export class WikipediaSearchSettingTab extends PluginSettingTab {
 
 		const fragment = new DocumentFragment();
 		fragment.createEl("span").innerHTML =
-			"Wikipedia Search Settings > Read the <a href='https://strangegirlmurph.github.io/obsidian-wikipedia-search/'>documentation</a>!";
+			"Wikipedia Helper Settings > Read the <a href='https://strangegirlmurph.github.io/obsidian-wikipedia-helper/'>documentation</a>!";
 		new Setting(containerEl).setName(fragment).setHeading();
 
 		new Setting(containerEl)
@@ -149,7 +149,7 @@ export class WikipediaSearchSettingTab extends PluginSettingTab {
 
 		const templateSettings = new DocumentFragment();
 		templateSettings.createEl("span").innerHTML =
-			"Templates (<a href='https://strangegirlmurph.github.io/obsidian-wikipedia-search/settings.html#template-settings'>Guide</a>)";
+			"Templates (<a href='https://strangegirlmurph.github.io/obsidian-wikipedia-helper/settings.html#template-settings'>Guide</a>)";
 		new Setting(containerEl).setName(templateSettings).setHeading();
 
 		this.addTemplateSettings(containerEl);
@@ -235,7 +235,7 @@ export class WikipediaSearchSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl).setName("Feedback, bug reports and feature requests 🌿").setHeading();
-		const appendix = `<p style="border-top:1px solid var(--background-modifier-border); padding: 0.75em 0; margin: unset;">If you have any kind of feedback, please let me know! No matter how small! I want to make this plugin as useful as possible for everyone and the only way I can improve this plugin for you is if you tell me about it. I love to hear about your ideas for new features, all the bugs you found and everything that annoys you. Don't be shy! I can also obsess a lot about small details. Just <a href="https://github.com/StrangeGirlMurph/obsidian-wikipedia-search/issues/new/choose">create an issue on GitHub</a> or <a href="mailto:work@murphy-in.space">write me an email</a> and I'll get back to you ASAP. ~ Murphy :)</p>
+		const appendix = `<p style="border-top:1px solid var(--background-modifier-border); padding: 0.75em 0; margin: unset;">If you have any kind of feedback, please let me know! No matter how small! I want to make this plugin as useful as possible for everyone and the only way I can improve this plugin for you is if you tell me about it. I love to hear about your ideas for new features, all the bugs you found and everything that annoys you. Don't be shy! I can also obsess a lot about small details. Just <a href="https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/issues/new/choose">create an issue on GitHub</a> or <a href="mailto:work@murphy-in.space">write me an email</a> and I'll get back to you ASAP. ~ Murphy :)</p>
 		<p style="margin: unset;">PS: Wikipedia also has a dark mode for everyone with an account.</p>`;
 		const div = containerEl.createEl("div");
 		div.innerHTML = appendix;

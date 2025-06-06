@@ -1,14 +1,14 @@
 import { Workspace, Modal, Platform, App } from "obsidian";
-import WikipediaSearchPlugin, { Wiki } from "src/main";
-import { WikipediaSearchSettings } from "src/settings";
+import WikipediaHelperPlugin, { Wiki } from "src/main";
+import { WikipediaHelperSettings } from "src/settings";
 import { Article } from "src/utils/searchModal";
 import { SearchModal } from "src/utils/searchModal";
 
 export class OpenArticleModal extends SearchModal {
 	workspace: Workspace;
-	plugin: WikipediaSearchPlugin;
+	plugin: WikipediaHelperPlugin;
 
-	constructor(app: App, settings: WikipediaSearchSettings, wiki: Wiki, plugin: WikipediaSearchPlugin) {
+	constructor(app: App, settings: WikipediaHelperSettings, wiki: Wiki, plugin: WikipediaHelperPlugin) {
 		super(app, settings, wiki);
 		this.workspace = app.workspace;
 		this.plugin = plugin;
