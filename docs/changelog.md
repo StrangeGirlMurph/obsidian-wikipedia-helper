@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.6.2](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.6.2) (12.06.2025)
+
+- Change the plugin name from Wikipedia Search to Wikipedia Helper
+
 ## [2.6.1](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.6.1) (09.02.2025)
 
 - Remove surfing integration and replace with web viewer core plugin
