@@ -3,7 +3,7 @@
 	"name": "Wikipedia Helper",
 	"version": "2.6.1",
 	"minAppVersion": "1.8.0",
-	"description": "A better Wikipedia plugin: Search, link, insert and open Wikipedia/Wikimedia articles.",
+	"description": "Search, link, insert and open Wikipedia/Wikimedia articles.",
 	"author": "StrangeGirlMurph",
 	"authorUrl": "https://github.com/StrangeGirlMurph/",
 	"fundingUrl": {

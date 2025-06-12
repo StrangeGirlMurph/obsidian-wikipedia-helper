@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "Wikipedia Helper"
   text: "Documentation"
-  tagline: "A better Wikipedia plugin: Search, link, insert and open Wikipedia/Wikimedia articles."
+  tagline: "Search, link, insert and open Wikipedia/Wikimedia articles directly from the app."
   actions:
     - theme: brand
       text: Getting Started

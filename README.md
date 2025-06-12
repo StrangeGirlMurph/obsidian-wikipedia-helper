@@ -1,8 +1,8 @@
 # Obsidian Wikipedia Helper Plugin
 
-An [Obsidian.md](https://obsidian.md/) plugin to quickly search, link, insert and open Wikipedia/Wikimedia articles directly in Obsidian and in your notes.
+A better [Obsidian.md](https://obsidian.md/) Wikipedia plugin to search, link, insert and open Wikipedia/Wikimedia articles directly from the app and in your notes.
 
-It supersedes the unmaintained Wikipedia plugin with lots of features. That's why it's also know as the Better Wikipedia plugin ✨
+It supersedes the unmaintained Wikipedia plugin with lots of features.
 
 On how to get started and everything else: **Read the [Documentation](https://strangegirlmurph.github.io/obsidian-wikipedia-helper/)!**
 
