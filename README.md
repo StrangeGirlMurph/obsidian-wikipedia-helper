@@ -4,7 +4,7 @@ A better [Obsidian.md](https://obsidian.md/) Wikipedia plugin to search, link, i
 
 It supersedes the unmaintained Wikipedia plugin with lots of features.
 
-On how to get started and everything else: **Read the [Documentation](https://strangegirlmurph.github.io/obsidian-wikipedia-helper/)!**
+On how to get started and everything else: **Read the [Documentation](https://wikipedia-helper.murphy.science/)!**
 
 ## Key Features
 
