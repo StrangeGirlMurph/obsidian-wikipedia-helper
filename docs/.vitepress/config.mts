@@ -5,7 +5,6 @@ export default defineConfig({
 	title: "Obsidian Wikipedia Helper",
 	description: "A better Wikipedia plugin: Search, link, insert and open Wikipedia/Wikimedia articles.",
 	lang: "en-US",
-	base: "/obsidian-wikipedia-helper/",
 
 	themeConfig: {
 		search: {
