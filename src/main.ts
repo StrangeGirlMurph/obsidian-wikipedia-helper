@@ -41,19 +41,6 @@ export default class WikipediaHelperPlugin extends Plugin {
 		await this.loadSettings();
 
 		this.addCommand({
-			id: "link-wikipedia-article",
-			name: "Link Wikipedia Article",
-			editorCallback: (editor: Editor) =>
-				new LinkArticleModal(this.app, this.settings, "Wikipedia", editor).open(),
-		});
-
-		this.addCommand({
-			id: "open-wikipedia-article",
-			name: "Open Wikipedia Article",
-			callback: () => new OpenArticleModal(this.app, this.settings, "Wikipedia", this).open(),
-		});
-
-		this.addCommand({
 			id: "create-wikipedia-article-note",
 			name: "Create Wikipedia Article Note",
 			callback: () => {
@@ -67,7 +54,7 @@ export default class WikipediaHelperPlugin extends Plugin {
 
 		addIcon("wikipedia", wikipediaIcon);
 		this.addRibbonIcon("wikipedia", "Open Article", () =>
-			new OpenArticleModal(this.app, this.settings, "Wikipedia", this).open()
+			new OpenArticleModal(this, this.app, this.settings, "Wikipedia").open()
 		);
 
 		for (const wiki of wikilist) {
@@ -81,7 +68,14 @@ export default class WikipediaHelperPlugin extends Plugin {
 			this.addCommand({
 				id: `open-${wiki.toLowerCase()}-article`,
 				name: `Open ${wiki} Article`,
-				callback: () => new OpenArticleModal(this.app, this.settings, wiki, this).open(),
+				callback: () =>
+					new OpenArticleModal(
+						this,
+						this.app,
+						this.settings,
+						wiki,
+						this.app.workspace.activeEditor?.editor
+					).open(),
 			});
 		}
 
