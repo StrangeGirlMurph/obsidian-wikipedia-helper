@@ -1,6 +1,6 @@
 {
 	"name": "wikipedia-helper",
-	"version": "2.6.2",
+	"version": "2.6.3",
 	"description": "A better Obsidian Wikipedia plugin: Search, link, insert and open Wikipedia/Wikimedia articles directly from the app.",
 	"main": "src/main.js",
 	"type": "module",
