@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.6.3](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.6.3) (07.11.2025)
+
+- Fix bug where the open command wouldn't insert the selected text in the search field.
+
 ## [2.6.2](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.6.2) (12.06.2025)
 
 - Change the plugin name from Wikipedia Search to Wikipedia Helper
