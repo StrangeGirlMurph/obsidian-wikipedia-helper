@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.7.0](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.7.0) (13.12.2025)
+
+- Added support for article categories.
+
 ## [2.6.3](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.6.3) (07.11.2025)
 
 - Fix bug where the open command wouldn't insert the selected text in the search field.
