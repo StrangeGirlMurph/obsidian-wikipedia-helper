@@ -7,6 +7,7 @@ import {
 	getWikipediaArticleIntros,
 	getWikipediaArticleThumbnails,
 } from "../API/wikipedia";
+import { getWikiArticleCategories } from "../API/mediawiki";
 import { Wiki } from "src/main";
 
 export async function generateInsert(
@@ -22,6 +23,17 @@ export async function generateInsert(
 		.replaceAll("{url}", article.url)
 		.replaceAll("{language}", languages[article.languageCode])
 		.replaceAll("{languageCode}", article.languageCode);
+
+	if (wiki != "Wikivoyage") {
+		if (content.includes("{categories}")) {
+			const categories: string | null =
+				(await getWikiArticleCategories([article.title], settings.language, wiki))?.[0] ?? null;
+			insert = insert.replaceAll("{categories}", categories ?? "");
+			if (!categories) new Notice("Could not fetch the articles categories.");
+		}
+	} else {
+		insert = insert.replaceAll("{categories}", "");
+	}
 
 	if (wiki == "Wikipedia") {
 		if (content.includes("{description}")) {

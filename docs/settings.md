@@ -68,6 +68,7 @@ _Available for all Wikis:_
 - `{url}` The url of the article.
 - `{language}` The name of the language of this article.
 - `{languageCode}` The language code of the language of this article.
+- `{categories}` The assigned categories of the article as a comma seperated list. (Not available for Wikivoyage!) 
 - `{cursor}` The position of the cursor after inserting. The first reference will be used an all the other deleted. By default (if no `{cursor}` is found) the cursor will be placed after the locally inserted content.
 
 _Available only for Wikipedia articles (for the other Wikis these tags simply get removed):_
