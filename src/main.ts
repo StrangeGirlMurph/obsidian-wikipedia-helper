@@ -33,7 +33,7 @@ export const wikilist: Wiki[] = [
 ];
 
 export default class WikipediaHelperPlugin extends Plugin {
-	settings: WikipediaHelperSettings;
+	declare settings: WikipediaHelperSettings;
 
 	async onload() {
 		console.log("Loading Wikipedia Helper plugin");
