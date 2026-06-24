@@ -1,4 +1,4 @@
-import { App, Notice, PluginSettingTab, SearchComponent, Setting } from "obsidian";
+import { App, Notice, PluginSettingTab, SearchComponent, Setting, ExtraButtonComponent } from "obsidian";
 import { languages } from "./utils/languages";
 import WikipediaHelperPlugin from "./main";
 import { FolderSuggest } from "./utils/suggesters/folderSuggest";
@@ -374,24 +374,27 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 			thirdGroup.appendChild(setting.controlEl.children[setting.controlEl.children.length - 2]);
 		}
 
-		new Setting(containerEl).addExtraButton((button) =>
-			button
-				.setTooltip("add template")
-				.setIcon("plus")
-				.onClick(async () => {
-					if (this.settings.templates.length == 21)
-						return new Notice(
-							"Easy buddy... I need to stop you right there. You can only have up to 20 templates. It's for your own good! (I think) If you really need more write me. If you convince me I'll let you have more.",
-							15000
-						);
+		const buttonContainer = containerEl.createDiv();
+		buttonContainer.style.display = "flex";
+		buttonContainer.style.justifyContent = "flex-end";
+		buttonContainer.style.padding = "0 var(--size-4-2)";
 
-					this.settings.templates.push({
-						...DEFAULT_TEMPLATE,
-						name: `Additional Template`,
-					});
-					await this.plugin.saveSettings();
-					this.display();
-				})
-		);
+		new ExtraButtonComponent(buttonContainer)
+			.setTooltip("add template")
+			.setIcon("plus")
+			.onClick(async () => {
+				if (this.settings.templates.length == 21)
+					return new Notice(
+						"Easy buddy... I need to stop you right there. You can only have up to 20 templates. It's for your own good! (I think) If you really need more write me. If you convince me I'll let you have more.",
+						15000
+					);
+
+				this.settings.templates.push({
+					...DEFAULT_TEMPLATE,
+					name: `Additional Template`,
+				});
+				await this.plugin.saveSettings();
+				this.display();
+			});
 	}
 }
