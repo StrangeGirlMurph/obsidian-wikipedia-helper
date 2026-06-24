@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.7.1](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.7.1) (24.06.2026)
+
+- Increased the api rate limit to 200 req/min.
+- Fixed the file and folder suggesters not working anymore.
+
 ## [2.7.0](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.7.0) (13.12.2025)
 
 - Added support for article categories.
