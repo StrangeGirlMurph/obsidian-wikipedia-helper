@@ -1,16 +1,24 @@
-// Credits go to Liam's Periodic Notes Plugin: https://github.com/liamcain/obsidian-periodic-notes
-
-import { TAbstractFile, TFolder } from "obsidian";
-import { TextInputSuggest } from "./suggest";
+import { AbstractInputSuggest, App, TAbstractFile, TFolder } from "obsidian";
 import { createNoteInActiveNotesFolderMarker } from "../createNote";
 
-export class FolderSuggest extends TextInputSuggest<string> {
+export class FolderSuggest extends AbstractInputSuggest<string> {
+	private inputEl: HTMLInputElement;
+
+	constructor(app: App, textInputEl: HTMLInputElement) {
+		super(app, textInputEl);
+		this.inputEl = textInputEl;
+	}
+
 	getSuggestions(inputStr: string): string[] {
 		const abstractFiles = this.app.vault.getAllLoadedFiles();
 		const folders: string[] = [];
 		const lowerCaseInputStr = inputStr.toLowerCase();
 
-		folders.push(createNoteInActiveNotesFolderMarker);
+		["[default note path]", createNoteInActiveNotesFolderMarker].forEach((marker) => {
+			if (marker.toLowerCase().contains(lowerCaseInputStr)) {
+				folders.push(marker);
+			}
+		});
 
 		abstractFiles.forEach((folder: TAbstractFile) => {
 			if (folder instanceof TFolder) {
@@ -30,9 +38,9 @@ export class FolderSuggest extends TextInputSuggest<string> {
 		el.setText(folderPath);
 	}
 
-	selectSuggestion(folderPath: string): void {
-		this.inputEl.value = folderPath;
-		this.inputEl.trigger("input");
+	selectSuggestion(folderPath: string, evt: MouseEvent | KeyboardEvent): void {
+		this.inputEl.value = folderPath === "[default note path]" ? "" : folderPath;
+		this.inputEl.dispatchEvent(new Event("input", { bubbles: true }));
 		this.close();
 	}
 }
