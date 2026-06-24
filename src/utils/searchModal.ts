@@ -4,6 +4,7 @@ import { getWikipediaArticleDescriptions, getWikipediaArticles } from "../API/wi
 import { WikipediaHelperSettings } from "../settings";
 import { getWikiArticles } from "../API/mediawiki";
 import { Wiki } from "src/main";
+import { RateLimitError } from "./toolsAPI";
 
 export interface Article {
 	title: string;
@@ -74,47 +75,55 @@ export abstract class SearchModal extends SuggestModal<Article> {
 		}
 		this.emptyStateText = "No results found.";
 
-		let searchResponses: Article[] | null = null;
+		try {
+			let searchResponses: Article[] | null = null;
 
-		if (this.wiki === "Wikipedia") {
-			searchResponses = await getWikipediaArticles(query, languageCode, this.settings.searchLimit);
-		} else {
-			searchResponses = await getWikiArticles(query, languageCode, this.wiki, this.settings.searchLimit);
-		}
+			if (this.wiki === "Wikipedia") {
+				searchResponses = await getWikipediaArticles(query, languageCode, this.settings.searchLimit);
+			} else {
+				searchResponses = await getWikiArticles(query, languageCode, this.wiki, this.settings.searchLimit);
+			}
 
-		if (searchResponses == null) {
-			this.emptyStateText = `Couldn't fetch any search results. Are you sure that ${this.wiki} supports this language?`;
-			return [];
-		} else if (searchResponses.length === 0) {
-			return [];
-		}
+			if (searchResponses == null) {
+				this.emptyStateText = `Couldn't fetch any search results. Are you sure that ${this.wiki} supports this language?`;
+				return [];
+			} else if (searchResponses.length === 0) {
+				return [];
+			}
 
-		if (this.settings.autoInsertSingleResponseQueries && searchResponses.length === 1) {
-			this.close();
-			this.onChooseSuggestion(searchResponses[0]);
-		}
+			if (this.settings.autoInsertSingleResponseQueries && searchResponses.length === 1) {
+				this.close();
+				this.onChooseSuggestion(searchResponses[0]);
+			}
 
-		let descriptions: (string | null)[] | null = [];
+			let descriptions: (string | null)[] | null = [];
 
-		if (this.wiki == "Wikipedia") {
-			descriptions = await getWikipediaArticleDescriptions(
-				searchResponses?.map((a) => a.title) ?? [],
-				languageCode
-			);
-		}
+			if (this.wiki == "Wikipedia") {
+				descriptions = await getWikipediaArticleDescriptions(
+					searchResponses?.map((a) => a.title) ?? [],
+					languageCode
+				);
+			}
 
-		if (descriptions == null) {
-			new Notice("Couldn't fetch any article descriptions.");
-			descriptions = new Array(searchResponses.length).fill(null);
-		}
+			if (descriptions == null) {
+				new Notice("Couldn't fetch any article descriptions.");
+				descriptions = new Array(searchResponses.length).fill(null);
+			}
 
-		if (descriptions.length === 0) {
-			return searchResponses;
-		} else {
-			return searchResponses.map((article, index) => ({
-				description: descriptions[index],
-				...article,
-			}));
+			if (descriptions.length === 0) {
+				return searchResponses;
+			} else {
+				return searchResponses.map((article, index) => ({
+					description: descriptions[index],
+					...article,
+				}));
+			}
+		} catch (e) {
+			if (e instanceof RateLimitError) {
+				this.emptyStateText = e.message;
+				return [];
+			}
+			throw e;
 		}
 	}
 

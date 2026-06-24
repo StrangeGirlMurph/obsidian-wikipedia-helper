@@ -32,7 +32,7 @@ export abstract class TemplateModal extends SuggestModal<Template> {
 			text: `${template.name} ${this.noteTemplatesOnly ? "" : template.createNote ? "(note)" : "(inline)"}`,
 		});
 		if (template.createNote && template.useTemplateFile) {
-			const file = app.vault.getAbstractFileByPath(template.templateFilePath);
+			const file = this.app.vault.getAbstractFileByPath(template.templateFilePath);
 			if (file && file instanceof TFile) {
 				el.createEl("small", {
 					text: `File: ${template.templateFilePath}`,

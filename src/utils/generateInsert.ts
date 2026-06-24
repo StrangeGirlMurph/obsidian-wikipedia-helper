@@ -9,6 +9,7 @@ import {
 } from "../API/wikipedia";
 import { getWikiArticleCategories } from "../API/mediawiki";
 import { Wiki } from "src/main";
+import { RateLimitError } from "./toolsAPI";
 
 export async function generateInsert(
 	settings: WikipediaHelperSettings,
@@ -24,54 +25,69 @@ export async function generateInsert(
 		.replaceAll("{language}", languages[article.languageCode])
 		.replaceAll("{languageCode}", article.languageCode);
 
-	if (wiki != "Wikivoyage") {
-		if (content.includes("{categories}")) {
-			const categories: string | null =
-				(await getWikiArticleCategories([article.title], settings.language, wiki))?.[0] ?? null;
-			insert = insert.replaceAll("{categories}", categories ?? "");
-			if (!categories) new Notice("Could not fetch the articles categories.");
-		}
-	} else {
-		insert = insert.replaceAll("{categories}", "");
-	}
-
-	if (wiki == "Wikipedia") {
-		if (content.includes("{description}")) {
-			const description: string | null =
-				(await getWikipediaArticleDescriptions([article.title], settings.language))?.[0] ?? null;
-			insert = insert.replaceAll("{description}", description ?? "");
-			if (!description) new Notice("Could not fetch the articles description.");
+	try {
+		if (wiki != "Wikivoyage") {
+			if (content.includes("{categories}")) {
+				const categories: string | null =
+					(await getWikiArticleCategories([article.title], settings.language, wiki))?.[0] ?? null;
+				insert = insert.replaceAll("{categories}", categories ?? "");
+				if (!categories) new Notice("Could not fetch the articles categories.");
+			}
+		} else {
+			insert = insert.replaceAll("{categories}", "");
 		}
 
-		if (content.includes("{intro}")) {
-			const intro: string | null =
-				(await getWikipediaArticleIntros([article.title], settings.language, settings.cleanupIntros))?.[0] ??
-				null;
-			insert = insert.replaceAll("{intro}", intro ?? "");
-			if (!intro) new Notice("Could not fetch the articles introduction.");
-		}
+		if (wiki == "Wikipedia") {
+			if (content.includes("{description}")) {
+				const description: string | null =
+					(await getWikipediaArticleDescriptions([article.title], settings.language))?.[0] ?? null;
+				insert = insert.replaceAll("{description}", description ?? "");
+				if (!description) new Notice("Could not fetch the articles description.");
+			}
 
-		if (content.includes("{thumbnail}") || content.includes("{thumbnailUrl}")) {
-			const thumbnailUrl: string | null =
-				(await getWikipediaArticleThumbnails([article.title], settings.language))?.[0] ?? null;
+			if (content.includes("{intro}")) {
+				const intro: string | null =
+					(
+						await getWikipediaArticleIntros([article.title], settings.language, settings.cleanupIntros)
+					)?.[0] ?? null;
+				insert = insert.replaceAll("{intro}", intro ?? "");
+				if (!intro) new Notice("Could not fetch the articles introduction.");
+			}
+
+			if (content.includes("{thumbnail}") || content.includes("{thumbnailUrl}")) {
+				const thumbnailUrl: string | null =
+					(await getWikipediaArticleThumbnails([article.title], settings.language))?.[0] ?? null;
+				insert = insert
+					.replaceAll(
+						"{thumbnail}",
+						thumbnailUrl
+							? `![${article.title} Thumbnail${
+									settings.thumbnailWidth ? ` | ${settings.thumbnailWidth}` : ""
+								}](${thumbnailUrl})`
+							: ""
+					)
+					.replaceAll("{thumbnailUrl}", thumbnailUrl ?? "");
+				if (!thumbnailUrl) new Notice("Could not fetch the articles thumbnail.");
+			}
+		} else {
 			insert = insert
-				.replaceAll(
-					"{thumbnail}",
-					thumbnailUrl
-						? `![${article.title} Thumbnail${
-								settings.thumbnailWidth ? ` | ${settings.thumbnailWidth}` : ""
-							}](${thumbnailUrl})`
-						: ""
-				)
-				.replaceAll("{thumbnailUrl}", thumbnailUrl ?? "");
-			if (!thumbnailUrl) new Notice("Could not fetch the articles thumbnail.");
+				.replaceAll("{description}", "")
+				.replaceAll("{intro}", "")
+				.replaceAll("{thumbnail}", "")
+				.replaceAll("{thumbnailUrl}", "");
 		}
-	} else {
-		insert = insert
-			.replaceAll("{description}", "")
-			.replaceAll("{intro}", "")
-			.replaceAll("{thumbnail}", "")
-			.replaceAll("{thumbnailUrl}", "");
+	} catch (e) {
+		if (e instanceof RateLimitError) {
+			new Notice(e.message);
+			insert = insert
+				.replaceAll("{categories}", "")
+				.replaceAll("{description}", "")
+				.replaceAll("{intro}", "")
+				.replaceAll("{thumbnail}", "")
+				.replaceAll("{thumbnailUrl}", "");
+		} else {
+			throw e;
+		}
 	}
 
 	let cursorPosition: number | null = insert.search("{cursor}");
