@@ -36,8 +36,6 @@ export default class WikipediaHelperPlugin extends Plugin {
 	declare settings: WikipediaHelperSettings;
 
 	async onload() {
-		console.log("Loading Wikipedia Helper plugin");
-
 		await this.loadSettings();
 
 		this.addCommand({

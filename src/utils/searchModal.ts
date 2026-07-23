@@ -30,7 +30,7 @@ export abstract class SearchModal extends SuggestModal<Article> {
 	}
 
 	onOpen(): void {
-		super.onOpen();
+		void super.onOpen();
 		if (this.settings.autoSearchNoteTitle) {
 			const fileName = this.app.workspace.getActiveFile()?.basename;
 			if (fileName && fileName != "") this.inputEl.value = fileName;
@@ -40,7 +40,7 @@ export abstract class SearchModal extends SuggestModal<Article> {
 			if (selection.trim() != "") this.inputEl.value = selection;
 		}
 		//@ts-ignore - private method
-		super.updateSuggestions();
+		void super.updateSuggestions();
 	}
 
 	renderSuggestion(article: Article | ArticleWithDescription, el: HTMLElement) {
