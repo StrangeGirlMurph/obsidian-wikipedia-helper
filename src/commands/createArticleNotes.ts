@@ -8,7 +8,7 @@ import { createNoteInActiveNotesFolderMarker, createNoteInFolder } from "src/uti
 import { Wiki } from "src/main";
 
 export class CreateArticleNoteModal extends SearchModal {
-	async onChooseSuggestion(article: Article) {
+	onChooseSuggestion(article: Article): void {
 		const templates = this.settings.templates.filter((template) => template.createNote);
 		if (templates.length > 1) {
 			new CreateArticleNoteTemplateModal(
@@ -20,7 +20,7 @@ export class CreateArticleNoteModal extends SearchModal {
 				true
 			).open();
 		} else {
-			createArticleNote(this.app, this.settings, article, this.wiki, templates[0]);
+			void createArticleNote(this.app, this.settings, article, this.wiki, templates[0]);
 		}
 	}
 }
@@ -37,8 +37,8 @@ class CreateArticleNoteTemplateModal extends TemplateModal {
 		super(app, settings, editor, article, wiki, noteTemplatesOnly);
 	}
 
-	async onChooseSuggestion(template: Template) {
-		createArticleNote(this.app, this.settings, this.article, this.wiki, template);
+	onChooseSuggestion(template: Template): void {
+		void createArticleNote(this.app, this.settings, this.article, this.wiki, template);
 	}
 }
 
@@ -80,8 +80,9 @@ async function createArticleNote(
 	);
 	if (!filePath) return;
 	if (settings.openCreatedNotes) {
-		app.workspace
-			.getLeaf(settings.openArticleInFullscreen ? "tab" : "split")
-			.openFile(app.vault.getAbstractFileByPath(filePath)! as TFile);
+		const createdFile = app.vault.getAbstractFileByPath(filePath);
+		if (createdFile && createdFile instanceof TFile) {
+			await app.workspace.getLeaf(settings.openArticleInFullscreen ? "tab" : "split").openFile(createdFile);
+		}
 	}
 }

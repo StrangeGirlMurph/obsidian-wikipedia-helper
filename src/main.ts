@@ -98,7 +98,7 @@ export default class WikipediaHelperPlugin extends Plugin {
 		}
 
 		this.settings = settings;
-		this.saveSettings();
+		await this.saveSettings();
 	}
 
 	async saveSettings() {

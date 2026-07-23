@@ -42,9 +42,9 @@ export async function getWikiArticleCategories(
 		titlesToURLParameter(titles);
 
 	const response = await fetchData(url);
-	if (!response.query) return null;
+	if (!response?.query?.pages) return null;
 
-	return sortResponsesByTitle(titles, Object.values(response.query.pages))
+	return sortResponsesByTitle(titles, Object.values(response.query.pages) as any[])
 		.map((page: any) => page.categories || null)
 		.map((v) => v.map((c: any) => c.title.split(":")[1]).join(", "));
 }

@@ -31,7 +31,7 @@ Feel free to ask me and the community if you have any questions in the [discussi
 
 ## Renaming
 
-The plugin's name used to be "Wikipedia Search". Even though its name has changed its internal ID hasn't for backwards compatibility reasons. You will find it being used in the plugins folder name and in the plugin URL. Just as a heads up so you won't be surprised.  
+The plugin's name used to be "Wikipedia Search". Even though its name has changed its internal ID hasn't for backwards compatibility reasons. You will find it being used in the plugins folder name and in the plugin URL. Just as a heads up so you won't be surprised.
 
 ## License
 

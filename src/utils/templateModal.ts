@@ -27,7 +27,7 @@ export abstract class TemplateModal extends SuggestModal<Template> {
 		this.setPlaceholder("Pick a template...");
 	}
 
-	renderSuggestion(template: Template, el: HTMLElement): any {
+	renderSuggestion(template: Template, el: HTMLElement): void {
 		el.createEl("div", {
 			text: `${template.name} ${this.noteTemplatesOnly ? "" : template.createNote ? "(note)" : "(inline)"}`,
 		});
@@ -57,5 +57,5 @@ export abstract class TemplateModal extends SuggestModal<Template> {
 		).filter((template) => template.name.toLowerCase().includes(query.toLowerCase()));
 	}
 
-	abstract onChooseSuggestion(template: Template): any;
+	abstract onChooseSuggestion(template: Template, evt: MouseEvent | KeyboardEvent): void;
 }

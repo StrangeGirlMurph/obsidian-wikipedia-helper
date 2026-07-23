@@ -37,9 +37,9 @@ export async function getWikipediaArticleDescriptions(
 		titlesToURLParameter(titles);
 
 	const response = await fetchData(url);
-	if (!response.query) return null;
+	if (!response?.query?.pages) return null;
 
-	return sortResponsesByTitle(titles, Object.values(response.query.pages)).map(
+	return sortResponsesByTitle(titles, Object.values(response.query.pages) as any[]).map(
 		(page: any) => page.description || null
 	);
 }
@@ -60,9 +60,9 @@ export async function getWikipediaArticleIntros(
 		titlesToURLParameter(titles);
 
 	const response = await fetchData(url);
-	if (!response.query) return null;
+	if (!response?.query?.pages) return null;
 
-	return sortResponsesByTitle(titles, Object.values(response.query.pages)).map((page: any) => {
+	return sortResponsesByTitle(titles, Object.values(response.query.pages) as any[]).map((page: any) => {
 		const extract: string = page.extract.trim() ?? null;
 		if (extract && cleanup) {
 			// auto-cleanup of intros
@@ -72,7 +72,7 @@ export async function getWikipediaArticleIntros(
 					.replaceAll(/{\\displaystyle [^\n]+}/g, (text: string) => "$" + text.slice(15, -1).trim() + "$")
 					// removes the unicode characters that try to replace the LaTeX and all the unnecessary linebreakes
 					.replaceAll("$\n  \n", "$")
-					.replaceAll(/\n  \n    \n      \n[^\$]*      \n    \n    \$/g, "$")
+					.replaceAll(/\n {2}\n {4}\n {6}\n[^$]* {6}\n {4}\n {4}[$]/g, "$")
 					// take care of some other quirks that can occur
 					.replaceAll("  ", " ")
 					// escape some markdown syntax
@@ -98,9 +98,9 @@ export async function getWikipediaArticleThumbnails(
 		titlesToURLParameter(titles);
 
 	const response = await fetchData(url);
-	if (!response.query) return null;
+	if (!response?.query?.pages) return null;
 
-	return sortResponsesByTitle(titles, Object.values(response.query.pages)).map(
+	return sortResponsesByTitle(titles, Object.values(response.query.pages) as any[]).map(
 		(page: any) => page.original?.source ?? null
 	);
 }

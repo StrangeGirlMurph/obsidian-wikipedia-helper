@@ -1,7 +1,7 @@
 import { requestUrl } from "obsidian";
 
-export function sortResponsesByTitle(titles: string[], responses: unknown[]) {
-	return responses.sort((a: any, b: any) => titles.indexOf(a.title) - titles.indexOf(b.title));
+export function sortResponsesByTitle<T extends { title?: string }>(titles: string[], responses: T[]): T[] {
+	return responses.sort((a, b) => titles.indexOf(a.title ?? "") - titles.indexOf(b.title ?? ""));
 }
 
 export function titlesToURLParameter(titles: string[]) {
@@ -21,12 +21,12 @@ export class RateLimitError extends Error {
 	}
 }
 
-export async function fetchData(url: string): Promise<any> {
+export async function fetchData<T = any>(url: string): Promise<T | null> {
 	const response = await requestUrl({
 		url,
 		headers: {
 			"User-Agent":
-				"Obsidian-Wikipedia-Helper/2.7.1 (https://github.com/StrangeGirlMurph/obsidian-wikipedia-search; mailto:work@murphy.science)",
+				"Obsidian-Wikipedia-Helper/2.7.2 (https://github.com/StrangeGirlMurph/obsidian-wikipedia-search; mailto:work@murphy.science)",
 		},
 	}).catch((e) => {
 		if (e && e.status === 429) {
@@ -47,7 +47,7 @@ export async function fetchData(url: string): Promise<any> {
 
 	try {
 		return response.json;
-	} catch (e) {
+	} catch {
 		// The page wasn't in JSON. There probably isn't an API in this language.
 		return null;
 	}

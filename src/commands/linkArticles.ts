@@ -8,18 +8,18 @@ import { createNoteInActiveNotesFolderMarker, createNoteInFolder } from "src/uti
 import { Wiki } from "src/main";
 
 export class LinkArticleModal extends SearchModal {
-	async onChooseSuggestion(article: Article) {
+	onChooseSuggestion(article: Article): void {
 		if (this.settings.templates.length > 1) {
 			new LinkArticleTemplateModal(this.app, this.settings, this.editor!, article, this.wiki).open();
 		} else {
-			linkArticle(this.app, this.editor!, this.settings, article, this.wiki, this.settings.templates[0]);
+			void linkArticle(this.app, this.editor!, this.settings, article, this.wiki, this.settings.templates[0]);
 		}
 	}
 }
 
 class LinkArticleTemplateModal extends TemplateModal {
-	async onChooseSuggestion(template: Template) {
-		linkArticle(this.app, this.editor, this.settings, this.article, this.wiki, template);
+	onChooseSuggestion(template: Template): void {
+		void linkArticle(this.app, this.editor, this.settings, this.article, this.wiki, template);
 	}
 }
 
@@ -87,7 +87,7 @@ async function linkArticle(
 		newContent = newContent.replace(internalCursorMarker, "");
 
 		editor.setValue(newContent);
-		const cursorPos = editor.offsetToPos(cursorPosition!);
+		const cursorPos = editor.offsetToPos(cursorPosition);
 		editor.setCursor(cursorPos);
 		editor.scrollIntoView({ from: cursorPos, to: cursorPos }, true);
 	}

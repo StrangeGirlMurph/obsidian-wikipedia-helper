@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.7.2](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.7.2) (23.07.2026)
+
+- Visually improve the settings tab
+- Fix minor things to improve on Obsidians new Scorecard (https://community.obsidian.md/plugins/wikipedia-search)
+
 ## [2.7.1](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.7.1) (24.06.2026)
 
 - Increased the api rate limit to 200 req/min.
@@ -24,7 +29,7 @@
 ## [2.6.0](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.6.0) (30.07.2024)
 
 - Fix problems with wrong auto-cleanup of intros
-- Add basic support for Wiktionary, Wikibooks, Wikiquote, Wikiversity, Wikivoyage, Wikisource, Wikinews 
+- Add basic support for Wiktionary, Wikibooks, Wikiquote, Wikiversity, Wikivoyage, Wikisource, Wikinews
 
 ## [2.5.1](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.5.1) (09.06.2024)
 

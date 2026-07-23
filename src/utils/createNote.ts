@@ -27,8 +27,8 @@ export async function createNoteInFolder(
 	if (file && !overrideExisting) {
 		new Notice(`Aborted! '${filePath}' already exists.`);
 		return null;
-	} else if (file && overrideExisting) {
-		await app.vault.modify(file as TFile, content);
+	} else if (file && file instanceof TFile && overrideExisting) {
+		await app.vault.modify(file, content);
 		new Notice(`Note successfully overwritten.`);
 		return filePath;
 	} else {

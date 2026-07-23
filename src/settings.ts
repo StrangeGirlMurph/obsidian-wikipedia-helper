@@ -73,8 +73,13 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		const fragment = new DocumentFragment();
-		fragment.createEl("span").innerHTML =
-			"Wikipedia Helper Settings > Read the <a href='https://strangegirlmurph.github.io/obsidian-wikipedia-helper/'>documentation</a>!";
+		const span = fragment.createEl("span");
+		span.appendText("Wikipedia Helper Settings > Read the ");
+		span.createEl("a", {
+			text: "documentation",
+			href: "https://strangegirlmurph.github.io/obsidian-wikipedia-helper/",
+		});
+		span.appendText("!");
 		new Setting(containerEl).setName(fragment).setHeading();
 
 		new Setting(containerEl)
@@ -148,8 +153,13 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 			});
 
 		const templateSettings = new DocumentFragment();
-		templateSettings.createEl("span").innerHTML =
-			"Templates (<a href='https://strangegirlmurph.github.io/obsidian-wikipedia-helper/settings.html#template-settings'>Guide</a>)";
+		const templateSpan = templateSettings.createEl("span");
+		templateSpan.appendText("Templates (");
+		templateSpan.createEl("a", {
+			text: "Guide",
+			href: "https://strangegirlmurph.github.io/obsidian-wikipedia-helper/settings.html#template-settings",
+		});
+		templateSpan.appendText(")");
 		new Setting(containerEl).setName(templateSettings).setHeading();
 
 		this.addTemplateSettings(containerEl);
@@ -235,9 +245,25 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl).setName("Feedback, bug reports and feature requests 🌿").setHeading();
-		const appendix = `<p style="border-top:1px solid var(--background-modifier-border); padding: 0.75em 0; margin: unset;">If you have any kind of feedback, please let me know! No matter how small! I want to make this plugin as useful as possible for everyone and the only way I can improve this plugin for you is if you tell me about it. I love to hear about your ideas for new features, all the bugs you found and everything that annoys you. Don't be shy! I can also obsess a lot about small details. Just <a href="https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/issues/new/choose">create an issue on GitHub</a> or <a href="mailto:work@murphy.science">write me an email</a> and I'll get back to you ASAP. ~ Murphy :)</p>`;
-		const div = containerEl.createEl("div");
-		div.innerHTML = appendix;
+		const feedbackParagraph = containerEl.createEl("p");
+		feedbackParagraph.setCssStyles({
+			padding: "0 var(--size-4-4)",
+			margin: "unset",
+			fontSize: "var(--font-ui-small)",
+		});
+		feedbackParagraph.appendText(
+			"If you have any kind of feedback, please let me know! No matter how small! I want to make this plugin as useful as possible for everyone and the only way I can improve this plugin for you is if you tell me about it. I love to hear about your ideas for new features, all the bugs you found and everything that annoys you. Don't be shy! I can also obsess a lot about small details. Just "
+		);
+		feedbackParagraph.createEl("a", {
+			text: "create an issue on GitHub",
+			href: "https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/issues/new/choose",
+		});
+		feedbackParagraph.appendText(" or ");
+		feedbackParagraph.createEl("a", {
+			text: "write me an email",
+			href: "mailto:work@murphy.science",
+		});
+		feedbackParagraph.appendText(" and I'll get back to you ASAP. ~ Murphy :)");
 	}
 
 	addTemplateSettings(containerEl: HTMLElement) {
@@ -246,8 +272,10 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 
 			let setting = new Setting(containerEl);
 			setting.settingEl.removeChild(setting.infoEl);
-			setting.controlEl.style.flexWrap = "wrap";
-			setting.controlEl.style.justifyContent = "center";
+			setting.controlEl.setCssStyles({
+				flexWrap: "wrap",
+				justifyContent: "center",
+			});
 
 			setting.addText((text) => {
 				if (isDefaultTemplate) text.setDisabled(true);
@@ -259,7 +287,9 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					});
 			});
-			setting.controlEl.children[setting.controlEl.children.length - 1].setAttr("style", "width: 140px;");
+			(setting.controlEl.children[setting.controlEl.children.length - 1] as HTMLElement).setCssStyles({
+				width: "140px",
+			});
 
 			setting.addToggle((toggle) =>
 				toggle
@@ -284,7 +314,11 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 			);
 
 			const firstGroup = setting.controlEl.createDiv();
-			firstGroup.setAttr("style", "display:flex;gap:var(--size-4-2);align-items:center;");
+			firstGroup.setCssStyles({
+				display: "flex",
+				gap: "var(--size-4-2)",
+				alignItems: "center",
+			});
 			firstGroup.appendChild(setting.controlEl.children[0]);
 			firstGroup.appendChild(setting.controlEl.children[0]);
 
@@ -300,10 +334,10 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 						});
 				});
 
-				setting.controlEl.children[setting.controlEl.children.length - 1].setAttr(
-					"style",
-					"flex-grow:1;width:170px;"
-				);
+				(setting.controlEl.children[setting.controlEl.children.length - 1] as HTMLElement).setCssStyles({
+					flexGrow: "1",
+					width: "170px",
+				});
 
 				setting.addToggle((toggle) =>
 					toggle
@@ -317,7 +351,12 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 				);
 
 				const secondGroup = setting.controlEl.createDiv();
-				secondGroup.setAttr("style", "display:flex;flex-grow:1;gap:var(--size-4-2);align-items:center;");
+				secondGroup.setCssStyles({
+					display: "flex",
+					flexGrow: "1",
+					gap: "var(--size-4-2)",
+					alignItems: "center",
+				});
 				secondGroup.appendChild(setting.controlEl.children[1]);
 				secondGroup.appendChild(setting.controlEl.children[1]);
 			}
@@ -333,16 +372,20 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 							await this.plugin.saveSettings();
 						});
 				});
-				setting.controlEl.children[setting.controlEl.children.length - 1].setAttr(
-					"style",
-					"flex-grow:1;width:170px;"
-				);
+				(setting.controlEl.children[setting.controlEl.children.length - 1] as HTMLElement).setCssStyles({
+					flexGrow: "1",
+					width: "170px",
+				});
 			} else {
 				setting.addTextArea((text) => {
-					text.inputEl.setAttr(
-						"style",
-						"white-space:pre;overflow-wrap:normal;overflow:hidden;resize:none;flex-grow:1;width:220px;"
-					);
+					text.inputEl.setCssStyles({
+						whiteSpace: "pre",
+						overflowWrap: "normal",
+						overflow: "hidden",
+						resize: "none",
+						flexGrow: "1",
+						width: "220px",
+					});
 					text.inputEl.setAttr("rows", template.createNote ? "3" : "2");
 
 					return text
@@ -357,7 +400,6 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 
 			setting.addExtraButton((button) => {
 				if (isDefaultTemplate) button.setDisabled(true);
-				button.extraSettingsEl.style.height = "min-content";
 				return button
 					.setTooltip("delete template")
 					.setIcon("minus")
@@ -369,17 +411,24 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 			});
 
 			const thirdGroup = setting.controlEl.createDiv();
-			thirdGroup.setAttr("style", "display:flex;flex-grow:1;gap:var(--size-4-2);align-items:center;");
+			thirdGroup.setCssStyles({
+				display: "flex",
+				flexGrow: "1",
+				gap: "var(--size-4-2)",
+				alignItems: "center",
+			});
 			thirdGroup.appendChild(setting.controlEl.children[setting.controlEl.children.length - 3]);
 			thirdGroup.appendChild(setting.controlEl.children[setting.controlEl.children.length - 2]);
 		}
 
 		const buttonContainer = containerEl.createDiv();
-		buttonContainer.style.display = "flex";
-		buttonContainer.style.justifyContent = "flex-end";
-		buttonContainer.style.padding = "0 var(--size-4-2)";
+		buttonContainer.setCssStyles({
+			display: "flex",
+			justifyContent: "flex-end",
+			padding: "0 var(--size-4-4)",
+		});
 
-		new ExtraButtonComponent(buttonContainer)
+		const addButton = new ExtraButtonComponent(buttonContainer)
 			.setTooltip("add template")
 			.setIcon("plus")
 			.onClick(async () => {
@@ -396,5 +445,6 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 				await this.plugin.saveSettings();
 				this.display();
 			});
+		addButton.extraSettingsEl.setCssStyles({ padding: "var(--size-2-2)" });
 	}
 }

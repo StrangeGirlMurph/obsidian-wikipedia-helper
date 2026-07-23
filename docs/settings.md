@@ -64,14 +64,16 @@ The last and most important part of any template is its template string. The tem
 The template string can be any kind of string containing line breaks and whatever you can think of. The plugin recognizes the following character sequences (tags) and replaces all occurrences with the corresponding data:
 
 _Available for all Wikis:_
+
 - `{title}` The articles title or current selection (based on [this setting](#use-article-title-instead-of-selection)).
 - `{url}` The url of the article.
 - `{language}` The name of the language of this article.
 - `{languageCode}` The language code of the language of this article.
-- `{categories}` The assigned categories of the article as a comma seperated list. (Not available for Wikivoyage!) 
+- `{categories}` The assigned categories of the article as a comma seperated list. (Not available for Wikivoyage!)
 - `{cursor}` The position of the cursor after inserting. The first reference will be used an all the other deleted. By default (if no `{cursor}` is found) the cursor will be placed after the locally inserted content.
 
 _Available only for Wikipedia articles (for the other Wikis these tags simply get removed):_
+
 - `{description}` The articles description if available. If not, all occurrences will be removed with a notice.
 - `{intro}` The articles intro (the first big paragraph). _Note: It can be pretty long and there are some [caveats](https://www.mediawiki.org/wiki/Extension:TextExtracts#Caveats) with the API! (intros can have weird mistakes)_
 - `{thumbnail}` An embed to the articles thumbnail if available. If not, all occurrences will be removed with a notice. This will look like `![<article-title> Thumbnail](<url-to-thumbnail>)` or `![<article-title> Thumbnail | <thumbnail-width>](<url-to-thumbnail>)` if the [thumbnail width](#thumbnail-width) is set.
@@ -119,7 +121,7 @@ intro
 	// take care of some other quirks that can occur
 	.replaceAll("  ", " ")
 	// escape some markdown syntax
-	.replaceAll("`", "\\`")
+	.replaceAll("`", "\\`");
 ```
 
 ::: details Example
