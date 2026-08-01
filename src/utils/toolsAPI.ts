@@ -26,7 +26,7 @@ export async function fetchData<T = any>(url: string): Promise<T | null> {
 		url,
 		headers: {
 			"User-Agent":
-				"Obsidian-Wikipedia-Helper/2.7.2 (https://github.com/StrangeGirlMurph/obsidian-wikipedia-search; mailto:work@murphy.science)",
+				"Obsidian-Wikipedia-Helper/2.7.3 (https://github.com/StrangeGirlMurph/obsidian-wikipedia-search; mailto:work@murphy.science)",
 		},
 	}).catch((e) => {
 		if (e && e.status === 429) {

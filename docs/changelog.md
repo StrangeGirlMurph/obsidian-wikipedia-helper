@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [2.7.3](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.7.3) (01.08.2026)
 
 - Comply with obsidians guidelines to improve the plugins review score
 
