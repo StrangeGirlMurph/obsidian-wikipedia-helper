@@ -73,7 +73,7 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		const fragment = new DocumentFragment();
-		const span = fragment.createEl("span");
+		const span = fragment.createSpan();
 		span.appendText("Wikipedia Helper Settings > Read the ");
 		span.createEl("a", {
 			text: "documentation",
@@ -153,7 +153,7 @@ export class WikipediaHelperSettingTab extends PluginSettingTab {
 			});
 
 		const templateSettings = new DocumentFragment();
-		const templateSpan = templateSettings.createEl("span");
+		const templateSpan = templateSettings.createSpan();
 		templateSpan.appendText("Templates (");
 		templateSpan.createEl("a", {
 			text: "Guide",

@@ -28,7 +28,7 @@ export abstract class TemplateModal extends SuggestModal<Template> {
 	}
 
 	renderSuggestion(template: Template, el: HTMLElement): void {
-		el.createEl("div", {
+		el.createDiv({
 			text: `${template.name} ${this.noteTemplatesOnly ? "" : template.createNote ? "(note)" : "(inline)"}`,
 		});
 		if (template.createNote && template.useTemplateFile) {

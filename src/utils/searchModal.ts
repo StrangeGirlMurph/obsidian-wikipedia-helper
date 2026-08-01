@@ -44,7 +44,7 @@ export abstract class SearchModal extends SuggestModal<Article> {
 	}
 
 	renderSuggestion(article: Article | ArticleWithDescription, el: HTMLElement) {
-		el.createEl("div", { text: article.title });
+		el.createDiv({ text: article.title });
 		if ("description" in article)
 			el.createEl("small", {
 				text: article.description || article.url.slice(8),
