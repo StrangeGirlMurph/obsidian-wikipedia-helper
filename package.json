@@ -10,7 +10,8 @@
 		"prettify": "eslint --fix . && npx prettier -w .",
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-		"version": "node version-bump.mjs && git add manifest.json versions.json",
+		"version": "node version-bump.mjs && git add manifest.json versions.json src/utils/toolsAPI.ts docs/changelog.md",
+		"postversion": "git push && git push --tags",
 		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",
 		"docs:preview": "vitepress preview docs"

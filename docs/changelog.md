@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+
+- Comply with obsidians guidelines to improve the plugins review score
+
 ## [2.7.2](https://github.com/StrangeGirlMurph/obsidian-wikipedia-helper/releases/tag/2.7.2) (23.07.2026)
 
 - Visually improve the settings tab
